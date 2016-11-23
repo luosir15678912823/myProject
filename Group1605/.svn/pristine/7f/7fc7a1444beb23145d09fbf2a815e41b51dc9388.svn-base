@@ -1,0 +1,54 @@
+// Generated code from Butter Knife. Do not modify!
+package com.nightly.lovetravel.fragment;
+
+import android.support.annotation.CallSuper;
+import android.support.annotation.UiThread;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.FrameLayout;
+import android.widget.ListView;
+import butterknife.Unbinder;
+import butterknife.internal.Utils;
+import com.nightly.lovetravel.R;
+import java.lang.IllegalStateException;
+import java.lang.Override;
+
+public class MenuFragment_ViewBinding<T extends MenuFragment> implements Unbinder {
+  protected T target;
+
+  private View view2131558588;
+
+  @UiThread
+  public MenuFragment_ViewBinding(final T target, View source) {
+    this.target = target;
+
+    View view;
+    view = Utils.findRequiredView(source, R.id.lv, "field 'lv' and method 'onLvItemClick'");
+    target.lv = Utils.castView(view, R.id.lv, "field 'lv'", ListView.class);
+    view2131558588 = view;
+    ((AdapterView<?>) view).setOnItemClickListener(new AdapterView.OnItemClickListener() {
+      @Override
+      public void onItemClick(AdapterView<?> p0, View p1, int p2, long p3) {
+        target.onLvItemClick(p0, p1, p2, p3);
+      }
+    });
+    target.flUser = Utils.findRequiredViewAsType(source, R.id.flUser, "field 'flUser'", FrameLayout.class);
+    target.flOperation = Utils.findRequiredViewAsType(source, R.id.flOperation, "field 'flOperation'", FrameLayout.class);
+  }
+
+  @Override
+  @CallSuper
+  public void unbind() {
+    T target = this.target;
+    if (target == null) throw new IllegalStateException("Bindings already cleared.");
+
+    target.lv = null;
+    target.flUser = null;
+    target.flOperation = null;
+
+    ((AdapterView<?>) view2131558588).setOnItemClickListener(null);
+    view2131558588 = null;
+
+    this.target = null;
+  }
+}

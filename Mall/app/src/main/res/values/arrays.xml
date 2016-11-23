@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <array name="minelv">
+        <item>我的订单</item>
+        <item>购物车</item>
+        <item>我的评论</item>
+        <item>个人中心</item>
+        <item>关于我们</item>
+    </array>
+</resources>

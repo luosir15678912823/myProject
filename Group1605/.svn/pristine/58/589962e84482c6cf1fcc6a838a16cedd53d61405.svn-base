@@ -1,0 +1,601 @@
+package com.nightly.lovetravel.fragment;
+
+import android.net.Uri;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.nightly.lovetravel.R;
+import com.nightly.lovetravel.adapter.BannerAdapter;
+import com.nightly.lovetravel.bean.AttractionsBean;
+import com.nightly.lovetravel.bean.CityHotelBean;
+import com.nightly.lovetravel.bean.WeatherBean;
+import com.nightly.lovetravel.util.DateTimeUtil;
+import com.nightly.lovetravel.util.HttpUtil;
+import com.nightly.lovetravel.util.JsonUtil;
+import com.nightly.lovetravel.util.ThreadUtil;
+import com.squareup.picasso.Picasso;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
+/**
+ * Created by Nightly on 2016/10/26.
+ */
+
+public class DetailFragment extends Fragment {
+
+
+    @BindView(R.id.vpPics)
+    ViewPager vpPics;
+    @BindView(R.id.tvName)
+    TextView tvName;
+    @BindView(R.id.tvAddress)
+    TextView tvAddress;
+    @BindView(R.id.tvOpenTime)
+    TextView tvOpenTime;
+    @BindView(R.id.tvCoupon)
+    TextView tvCoupon;
+    @BindView(R.id.tvPriceList)
+    TextView tvPriceList;
+    @BindView(R.id.llWeather)
+    LinearLayout llWeather;
+    @BindView(R.id.tvContent)
+    TextView tvContent;
+    @BindView(R.id.sv)
+    ScrollView sv;
+    @BindView(R.id.tvBack)
+    TextView tvBack;
+    @BindView(R.id.tvFavorite)
+    TextView tvFavorite;
+    @BindView(R.id.llActionBar)
+    LinearLayout llActionBar;
+    @BindView(R.id.tvHotelDetail)
+    TextView tvHotelDetail;
+    @BindView(R.id.ivHotelPicI)
+    ImageView ivHotelPicI;
+    @BindView(R.id.tvHotelNameI)
+    TextView tvHotelNameI;
+    @BindView(R.id.ivHotelPicII)
+    ImageView ivHotelPicII;
+    @BindView(R.id.tvHotelNameII)
+    TextView tvHotelNameII;
+    @BindView(R.id.ivHotelPicIII)
+    ImageView ivHotelPicIII;
+    @BindView(R.id.tvHotelNameIII)
+    TextView tvHotelNameIII;
+    @BindView(R.id.llHotel)
+    LinearLayout llHotel;
+    @BindView(R.id.tvWeatherDetail)
+    TextView tvWeatherDetail;
+    @BindView(R.id.ivWeatherPicI)
+    ImageView ivWeatherPicI;
+    @BindView(R.id.tvDateI)
+    TextView tvDateI;
+    @BindView(R.id.ivWeatherPicII)
+    ImageView ivWeatherPicII;
+    @BindView(R.id.tvDateII)
+    TextView tvDateII;
+    @BindView(R.id.ivWeatherPicIII)
+    ImageView ivWeatherPicIII;
+    @BindView(R.id.tvDateIII)
+    TextView tvDateIII;
+    @BindView(R.id.ivWeatherPicIV)
+    ImageView ivWeatherPicIV;
+    @BindView(R.id.tvDateIV)
+    TextView tvDateIV;
+    @BindView(R.id.ivWeatherPicV)
+    ImageView ivWeatherPicV;
+    @BindView(R.id.tvDateV)
+    TextView tvDateV;
+    @BindView(R.id.ivWeatherPicVI)
+    ImageView ivWeatherPicVI;
+    @BindView(R.id.tvDateVI)
+    TextView tvDateVI;
+    @BindView(R.id.ivWeatherPicVII)
+    ImageView ivWeatherPicVII;
+    @BindView(R.id.tvDateVII)
+    TextView tvDateVII;
+    @BindView(R.id.tvHotelNoData)
+    TextView tvHotelNoData;
+    @BindView(R.id.llHotelI)
+    LinearLayout llHotelI;
+    @BindView(R.id.llHotelII)
+    LinearLayout llHotelII;
+    @BindView(R.id.llHotelIII)
+    LinearLayout llHotelIII;
+    @BindView(R.id.points)
+    LinearLayout points;
+    private View view;
+
+    private Fragment fragment;
+    private final int MSG_PIC_GOT = 1;
+    private final int HOTEL_INFO_GOT = 2;
+    private final int WEATHER_INFO_GOT = 3;
+    private AttractionsBean.ShowapiResBodyBean.PagebeanBean.ContentlistBean data;
+    // 声明控件
+    private List<ImageView> mlist = null;
+    // 轮播图素材
+    private List<String> bannerImages = null;
+    // ViewPager适配器
+    private BannerAdapter mAdapter;
+    private BannerListener bannerListener;
+    private String TAG = "test";
+    // 圆圈标志位
+    private int pointIndex = 0;
+    // 线程标志
+    private boolean isStop = false;
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case MSG_PIC_GOT:
+                    bannerImages = (List<String>) msg.obj;
+                    initData();
+                    initAction();
+                    Log.e(TAG, "initAction: 6");
+                    break;
+                case HOTEL_INFO_GOT:
+                    dealHotelData(msg);
+                    break;
+                case WEATHER_INFO_GOT:
+                    dealWeatherData(msg);
+                    break;
+            }
+        }
+    };
+    private HotelListFragment hotelListFragment;
+    private WeatherFragment weatherFragment;
+    private CityHotelBean hotelBean;
+    private WeatherBean weatherBean;
+
+    public void setData(AttractionsBean.ShowapiResBodyBean.PagebeanBean.ContentlistBean data) {
+        this.data = data;
+    }
+
+    public void setFragment(Fragment fragment) {
+        this.fragment = fragment;
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        if (view == null) {
+            view = inflater.inflate(R.layout.fragment_detail, container, false);
+            ButterKnife.bind(this, view);
+        }
+        final List<AttractionsBean.ShowapiResBodyBean.PagebeanBean.ContentlistBean.PicListBean> picList = data.getPicList();
+        AttractionsBean.ShowapiResBodyBean.PagebeanBean.ContentlistBean.LocationBean location = data.getLocation();
+        List<AttractionsBean.ShowapiResBodyBean.PagebeanBean.ContentlistBean.PriceListBean> priceList = data.getPriceList();
+        String name = data.getName();
+        String address = data.getAddress();
+        String proId = data.getProId();
+        String proName = data.getProName();
+        final String cityId = data.getCityId();
+        final String cityName = data.getCityName();
+        String areaId = data.getAreaId();
+        String areaName = data.getAreaName();
+        String coupon=(data.getCoupon()==null?"":data.getCoupon());
+        String openTime=(data.getOpentime()==null?"":data.getOpentime());
+        String summary = (data.getSummary()==null?"":data.getSummary());
+        String content = (data.getContent()==null?"":data.getContent());
+        final String lat = location.getLat();
+        final String lon = location.getLon();
+        tvOpenTime.setText("开放时间：" + ("".equals(openTime.toString().trim()) ? "不详" : openTime));
+        tvCoupon.setText("".equals(coupon.toString().trim()) ? "优惠信息：无" : coupon);
+        /**
+         * 获取图片列表信息
+         */
+        ThreadUtil.execute(new Runnable() {
+            @Override
+            public void run() {
+                AttractionsBean.ShowapiResBodyBean.PagebeanBean.ContentlistBean.PicListBean picListBean = null;
+                String picUrl = "";
+                List<String> pics = new ArrayList<String>();
+                for (int i = 0; i < picList.size(); i++) {
+                    picListBean = picList.get(i);
+                    picUrl = picListBean.getPicUrl();
+                    pics.add(picUrl);
+                }
+                sendObjectMessage(pics, MSG_PIC_GOT);
+            }
+        });
+        Log.e(TAG, "onCreateView: cityName=" + cityName + "/" + lat + "/" + lon);
+        /**
+         * 获取酒店信息
+         */
+        ThreadUtil.execute(new Runnable() {
+            @Override
+            public void run() {
+
+                //假设今天入住明天离开，否则查询不到数据
+                String comeDate = DateTimeUtil.getTimestampShort();
+                Date date = new Date();
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                String specifiedDay = sdf.format(date);
+//                    Log.e(TAG, "run: 今天="+specifiedDay+",明天="+DateTimeUtil.getSpecifiedDayAfter(specifiedDay));
+                String leaveDate = DateTimeUtil.getSpecifiedDayAfter(specifiedDay);
+
+                String sectionId = "";
+                String keyword = "";
+                String longitude = lon;
+                String latitude = lat;
+                String hbs = "";
+                String starRatedId = "";
+                String sortType = "";
+                String page = "1";
+                String pageSize = "20";
+                String hotels = HttpUtil.getHotels(cityId, comeDate, leaveDate, sectionId, keyword, longitude, latitude, hbs, starRatedId, sortType, page, pageSize);
+                sendJsonMessage(hotels, HOTEL_INFO_GOT);
+            }
+        });
+        /**
+         * 获取天气信息
+         */
+        ThreadUtil.execute(new Runnable() {
+            @Override
+            public void run() {
+                String areaid = "";
+                String area = cityName;
+                String needMoreDay = "1";
+                String needIndex = "1";
+                String needHourData = "0";
+                String need3HourForcast = "0";
+                String needAlarm = "1";
+                String weather = HttpUtil.getWeather(areaid, area, needMoreDay, needIndex, needHourData, need3HourForcast, needAlarm);
+                sendJsonMessage(weather, WEATHER_INFO_GOT);
+            }
+        });
+//        Log.e(TAG, "onCreateView: " + content);
+        tvName.setText(name);
+        Log.e(TAG, "onCreateView: ");
+        tvContent.setText("".equals(content.toString().trim())?summary:content);
+
+        tvAddress.setText("地址：" + (address.contains(proName.substring(2)) ? address : proName + cityName + areaName + address));
+        String temp = "";
+        if (priceList != null) {
+            for (AttractionsBean.ShowapiResBodyBean.PagebeanBean.ContentlistBean.PriceListBean priceListBean : priceList) {
+                String type = priceListBean.getType();//门票类型
+                List<AttractionsBean.ShowapiResBodyBean.PagebeanBean.ContentlistBean.PriceListBean.EntityListBean> entityList = priceListBean.getEntityList();
+                if (entityList != null) {
+                    for (AttractionsBean.ShowapiResBodyBean.PagebeanBean.ContentlistBean.PriceListBean.EntityListBean entityListBean : entityList) {
+                        String ticketName = entityListBean.getTicketName();
+                        String amount = entityListBean.getAmount();//零售价
+                        String amountAdvice = entityListBean.getAmountAdvice();//建议零售价
+                        temp = ticketName + "   零售价：" + amount + "元  建议零售价：" + amountAdvice + "元\n";
+                    }
+                } else {
+                    temp = "无";
+                }
+                temp = type + "   " + temp;
+            }
+        } else {
+            temp = "暂无相关信息。";
+        }
+        tvPriceList.setText(temp);
+        tvContent.setText(content);
+
+        return view;
+    }
+
+    /**
+     *
+     */
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        isStop = true;
+        mAdapter=null;
+        bannerListener=null;
+    }
+
+    /**
+     * 初始化事件
+     */
+    private void initAction() {
+        bannerListener = new BannerListener();
+//        vpPics.setOnPageChangeListener(bannerListener);
+        vpPics.addOnPageChangeListener(bannerListener);
+        //取中间数来作为起始位置
+        int index =   (mlist.size()%Integer.MAX_VALUE)/2;
+        //用来触发监听器
+        vpPics.setCurrentItem(index);
+        if(points.getChildAt(pointIndex)!=null) {
+            points.getChildAt(pointIndex).setEnabled(true);
+        }else {
+
+        }
+    }
+
+    /**
+     * 初始化数据
+     */
+    private void initData() {
+        mlist = new ArrayList<ImageView>();
+        View view;
+        LinearLayout.LayoutParams params;
+        for (int i = 0; i < bannerImages.size(); i++) {
+            // 设置广告图
+            ImageView imageView = new ImageView(getContext());
+            imageView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
+            Picasso.with(getContext()).load(Uri.parse(bannerImages.get(i))).into(imageView);
+//            imageView.setBackgroundResource(bannerImages[i]);
+            mlist.add(imageView);
+            // 设置圆圈点
+            view = new View(getContext());
+            params = new LinearLayout.LayoutParams(5, 5);
+            params.leftMargin = 10;
+            view.setBackgroundResource(R.drawable.point__bg);
+//            view.setAnimation(new ScaleAnimation(0f, ((float) -view.getWidth()),0f,0f));
+            view.setLayoutParams(params);
+            view.setEnabled(false);
+
+            points.addView(view);
+        }
+        mAdapter = new BannerAdapter(mlist);
+        vpPics.setAdapter(mAdapter);
+        autoPlayPic();
+    }
+
+    /**
+     * 自动播放图片
+     */
+    private void autoPlayPic() {
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                vpPics.setCurrentItem(vpPics.getCurrentItem() + 1);
+                if (!isStop) {
+                    autoPlayPic();
+                }
+            }
+        }, 3000);
+    }
+
+    /**
+     * 给handler发送消息
+     *
+     * @param json
+     * @param what
+     */
+    private void sendJsonMessage(String json, int what) {
+        Message message = handler.obtainMessage();
+        message.what = what;
+        message.obj = json;
+        handler.sendMessage(message);
+    }
+
+    /**
+     * 给handler发送object对象
+     *
+     * @param object
+     * @param what
+     */
+    private void sendObjectMessage(Object object, int what) {
+        Message message = handler.obtainMessage();
+        message.what = what;
+        message.obj = object;
+        handler.sendMessage(message);
+    }
+    //返回上一级菜单
+    @OnClick(R.id.tvBack)
+    public void onTvBackClick(View view) {
+//        getFragmentManager().findFragmentByTag()
+        getFragmentManager()
+                .beginTransaction()
+                .setCustomAnimations(R.anim.fragment_left_to_right_enter,R.anim.fragment_left_to_right_exit)
+                .replace(R.id.fm, fragment)
+                .remove(this)
+                .commit();
+    }
+
+    /**
+     * 查看酒店列表
+     * @param view
+     */
+    @OnClick(R.id.tvHotelDetail)
+    public void onTvHotelDetailClick(View view) {
+        hotelListFragment = new HotelListFragment();
+        if(weatherBean!=null) {
+            hotelListFragment.setCityHotelBean(hotelBean);
+            hotelListFragment.setFragment(this);
+            getFragmentManager()
+                    .beginTransaction()
+                    .setCustomAnimations(R.anim.fragment_right_to_left_enter,R.anim.fragment_right_to_left_exit)
+                    .replace(R.id.fm, hotelListFragment)
+                    .commit();
+
+        }else {
+            Toast.makeText(getContext(),"请稍后重试。",Toast.LENGTH_LONG);
+        }
+    }
+
+    /**
+     * 查看天气详情
+     * @param view
+     */
+    @OnClick(R.id.tvWeatherDetail)
+    public void onTvWeatherDetailClick(View view) {
+        weatherFragment = new WeatherFragment();
+        weatherFragment.setFragment(this);
+        if(weatherBean!=null) {
+            weatherFragment.setWeatherBean(weatherBean);
+            getFragmentManager()
+                    .beginTransaction()
+                    .setCustomAnimations(R.anim.fragment_left_to_right_enter,R.anim.fragment_left_to_right_exit)
+                    .replace(R.id.fm, weatherFragment)
+                    .commit();
+        }else {
+            Toast.makeText(getContext(),"请稍后重试。",Toast.LENGTH_LONG);
+        }
+    }
+
+    /**
+     * 收藏按钮
+     * @param view
+     */
+    @OnClick(R.id.tvFavorite)
+    public void onTvFavorite(View view){
+
+        if(true){
+            Toast.makeText(getActivity(), "收藏成功。", Toast.LENGTH_SHORT).show();
+            tvFavorite.setBackgroundResource(R.mipmap.favorite);
+        }else {
+            Toast.makeText(getContext(), "收藏失败。", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    /**
+     * 处理酒店数据
+     *
+     * @param msg
+     */
+    private void dealHotelData(Message msg) {
+
+        tvHotelNoData.setVisibility(View.GONE);
+        llHotel.setVisibility(View.VISIBLE);
+        String json = (String) msg.obj;
+        Log.e(TAG, "handleMessage: json=" + json);
+        hotelBean = JsonUtil.parseToCityHotelBean(json);
+        if (hotelBean != null && hotelBean.getShowapi_res_body() != null && hotelBean.getShowapi_res_body().getList() != null && hotelBean.getShowapi_res_body().getList().size() >= 3) {
+            //有大于三条记录时
+            List<CityHotelBean.ShowapiResBodyBean.ListBean> list = hotelBean.getShowapi_res_body().getList();
+            CityHotelBean.ShowapiResBodyBean.ListBean hotelI = list.get(0);
+            tvHotelNameI.setText(hotelI.getHotelName());
+            Picasso.with(getActivity())
+                    .load(Uri.parse(hotelI.getImg()))
+                    .into(ivHotelPicI);
+            CityHotelBean.ShowapiResBodyBean.ListBean hotelII = list.get(1);
+            tvHotelNameII.setText(hotelII.getHotelName());
+            Picasso.with(getActivity())
+                    .load(Uri.parse(hotelII.getImg()))
+                    .into(ivHotelPicII);
+            CityHotelBean.ShowapiResBodyBean.ListBean hotelIII = list.get(2);
+            tvHotelNameIII.setText(hotelIII.getHotelName());
+            Picasso.with(getActivity())
+                    .load(Uri.parse(hotelIII.getImg()))
+                    .into(ivHotelPicIII);
+        } else if (hotelBean != null && hotelBean.getShowapi_res_body() != null && hotelBean.getShowapi_res_body().getList() != null && hotelBean.getShowapi_res_body().getList().size() == 2) {
+            //仅有两条记录时
+            List<CityHotelBean.ShowapiResBodyBean.ListBean> list = hotelBean.getShowapi_res_body().getList();
+            CityHotelBean.ShowapiResBodyBean.ListBean hotelI = list.get(0);
+            tvHotelNameI.setText(hotelI.getHotelName());
+            Picasso.with(getActivity())
+                    .load(Uri.parse(hotelI.getImg()))
+                    .into(ivHotelPicI);
+            CityHotelBean.ShowapiResBodyBean.ListBean hotelII = list.get(1);
+            tvHotelNameII.setText(hotelII.getHotelName());
+            Picasso.with(getActivity())
+                    .load(Uri.parse(hotelII.getImg()))
+                    .into(ivHotelPicII);
+            llHotelIII.setVisibility(View.GONE);
+        } else if (hotelBean != null && hotelBean.getShowapi_res_body() != null && hotelBean.getShowapi_res_body().getList() != null && hotelBean.getShowapi_res_body().getList().size() == 1) {
+            //仅有一条记录时
+            List<CityHotelBean.ShowapiResBodyBean.ListBean> list = hotelBean.getShowapi_res_body().getList();
+            CityHotelBean.ShowapiResBodyBean.ListBean hotelI = list.get(0);
+            tvHotelNameI.setText(hotelI.getHotelName());
+            Picasso.with(getActivity())
+                    .load(Uri.parse(hotelI.getImg()))
+                    .into(ivHotelPicI);
+            llHotelII.setVisibility(View.GONE);
+            llHotelIII.setVisibility(View.GONE);
+        } else {
+            //无记录时
+            tvHotelNoData.setVisibility(View.VISIBLE);
+            llHotel.setVisibility(View.GONE);
+        }
+
+    }
+
+    /**
+     * 处理天气数据
+     *
+     * @param msg
+     */
+    private void dealWeatherData(Message msg) {
+        String json = (String) msg.obj;
+        weatherBean = JsonUtil.parseToWeatherBean(json);
+        if (weatherBean != null && weatherBean.getShowapi_res_body() != null) {
+            List<WeatherBean.ShowapiResBodyBean.AlarmListBean> alarmList = weatherBean.getShowapi_res_body().getAlarmList();
+            WeatherBean.ShowapiResBodyBean.CityInfoBean cityInfo = weatherBean.getShowapi_res_body().getCityInfo();
+            WeatherBean.ShowapiResBodyBean.F1Bean f1 = weatherBean.getShowapi_res_body().getF1();
+            WeatherBean.ShowapiResBodyBean.F2Bean f2 = weatherBean.getShowapi_res_body().getF2();
+            WeatherBean.ShowapiResBodyBean.F3Bean f3 = weatherBean.getShowapi_res_body().getF3();
+            WeatherBean.ShowapiResBodyBean.F4Bean f4 = weatherBean.getShowapi_res_body().getF4();
+            WeatherBean.ShowapiResBodyBean.F5Bean f5 = weatherBean.getShowapi_res_body().getF5();
+            WeatherBean.ShowapiResBodyBean.F6Bean f6 = weatherBean.getShowapi_res_body().getF6();
+            WeatherBean.ShowapiResBodyBean.F7Bean f7 = weatherBean.getShowapi_res_body().getF7();
+            WeatherBean.ShowapiResBodyBean.NowBean now = weatherBean.getShowapi_res_body().getNow();
+            Picasso.with(getActivity()).load(Uri.parse(f1.getDay_weather_pic())).into(ivWeatherPicI);
+            tvDateI.setText(formatData(f1.getDay()));
+            Picasso.with(getActivity()).load(Uri.parse(f2.getDay_weather_pic())).into(ivWeatherPicII);
+            tvDateII.setText(formatData(f2.getDay()));
+            Picasso.with(getActivity()).load(Uri.parse(f3.getDay_weather_pic())).into(ivWeatherPicIII);
+            tvDateIII.setText(formatData(f3.getDay()));
+            Picasso.with(getActivity()).load(Uri.parse(f4.getDay_weather_pic())).into(ivWeatherPicIV);
+            tvDateIV.setText(formatData(f4.getDay()));
+            Picasso.with(getActivity()).load(Uri.parse(f5.getDay_weather_pic())).into(ivWeatherPicV);
+            tvDateV.setText(formatData(f5.getDay()));
+            Picasso.with(getActivity()).load(Uri.parse(f6.getDay_weather_pic())).into(ivWeatherPicVI);
+            tvDateVI.setText(formatData(f6.getDay()));
+            Picasso.with(getActivity()).load(Uri.parse(f7.getDay_weather_pic())).into(ivWeatherPicVII);
+            tvDateVII.setText(formatData(f7.getDay()));
+        }
+    }
+
+    /**
+     * 将天气接口返回的日期（yyyyMMddHHmmss）截取成MM-dd的格式
+     *
+     * @param data
+     * @return
+     */
+    private String formatData(String data) {
+        String substring = data.substring(4, data.length());
+        return substring.substring(0, 2) + "-" + substring.substring(2, substring.length());
+    }
+
+
+
+    //实现VierPager监听器接口
+    class BannerListener implements ViewPager.OnPageChangeListener {
+
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+        }
+
+        @Override
+        public void onPageSelected(int position) {
+            int newPosition = position % bannerImages.size();
+            points.getChildAt(newPosition).setEnabled(true);
+            points.getChildAt(pointIndex).setEnabled(false);
+            // 更新标志位
+            pointIndex = newPosition;
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int state) {
+
+        }
+    }
+
+
+}

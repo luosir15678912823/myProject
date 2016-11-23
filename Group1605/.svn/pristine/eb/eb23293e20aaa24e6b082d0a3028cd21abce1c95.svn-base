@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "C:\\Nightly\\Android-Nightly\\group\\LoveTravel\\pulltorerefreshlibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-v23\\abc_control_background_material.xml",
+        "source": "C:\\Nightly\\Android-Nightly\\group\\LoveTravel\\pulltorerefreshlibrary\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\drawable-v23\\abc_control_background_material.xml"
+    },
+    {
+        "merged": "C:\\Nightly\\Android-Nightly\\LoveTravel\\pulltorerefreshlibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-v23\\abc_control_background_material.xml",
+        "source": "C:\\Nightly\\Android-Nightly\\LoveTravel\\pulltorerefreshlibrary\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\drawable-v23\\abc_control_background_material.xml"
+    }
+]

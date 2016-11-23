@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">LoveTravel</string>
+    <string-array name="cities">
+        <item>个人中心</item>
+        <item>我的收藏</item>
+        <item>我的足迹</item>
+        <item>注销</item>
+    </string-array>
+</resources>

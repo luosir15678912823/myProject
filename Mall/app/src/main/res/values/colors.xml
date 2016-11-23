@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryII">#9a3f51b5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="white">#fff</color>
+    <color name="white_ii">#ddd</color>
+    <color name="colorBlack">#5e000000</color>
+    <color name="actionBarColor">#000</color>
+    <color name="sbc_header_text">#ff808080</color>
+
+    <color name="grayDark">#a3a3a3</color>
+    <color name="grayLight">#d6d6d6</color>
+    <color name="grayLightII">#f2f2f2</color>
+    <color name="grayLightIII">#f4f4f4</color>
+    <color name="whiteTran">#c6ffffff</color>
+    <color name="whiteTranII">#a8ffffff</color>
+    <color name="red">#F00</color>
+    <color name="cyan">#2accf9</color>
+    <color name="black">#000</color>
+</resources>

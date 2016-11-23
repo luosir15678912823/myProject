@@ -1,0 +1,155 @@
+package com.nightly.lovetravel.adapter;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.nightly.lovetravel.R;
+import com.nightly.lovetravel.bean.AttractionsBean;
+import com.nightly.lovetravel.bean.ContentBean;
+import com.squareup.picasso.Picasso;
+
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+/**
+ * Created by Nightly on 2016/10/22.
+ */
+
+public class FavoriteResultAdapter extends BaseAdapter {
+    private Context context;
+    private List<ContentBean> data;
+    private LayoutInflater inflater;
+    private String TAG = "test";
+
+    public FavoriteResultAdapter(Context context, List<ContentBean> data) {
+        this.context = context;
+        this.data = data;
+        inflater = LayoutInflater.from(context);
+    }
+
+    @Override
+    public int getCount() {
+        if (data != null) {
+            return data.size();
+        } else {
+            return 0;
+        }
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return null;
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return 0;
+    }
+
+    @Override
+    public View getView(final int position, View convertView, ViewGroup parent) {
+        final ViewHolder holder;
+        if (convertView == null) {
+            convertView = inflater.inflate(R.layout.search_result_item_linear, parent, false);
+            holder = new ViewHolder(convertView);
+            convertView.setTag(holder);
+        } else {
+            holder = ((ViewHolder) convertView.getTag());
+        }
+        if (data != null) {
+            AttractionsBean.ShowapiResBodyBean.PagebeanBean.ContentlistBean bean = data.get(position).getContentlistBean();
+            holder.tvName.setText(bean.getName());
+            holder.tvSummary.setText(bean.getSummary().length() > 35 ? bean.getSummary().subSequence(0, 30) + "……" : bean.getSummary());
+            holder.tvAddress.setText(bean.getProName() + bean.getCityName() + bean.getAreaName() + bean.getAddress());
+            List<AttractionsBean.ShowapiResBodyBean.PagebeanBean.ContentlistBean.PicListBean> picList = bean.getPicList();
+            int size = picList.size();
+            if (size > 0) {
+                Picasso.with(context).load(picList.get(0).getPicUrlSmall())
+                        .into(holder.ivPic);
+            }
+//            if(size==1){
+//                holder.tvTotalPic.setText("共"+size+"张图片");
+//            }else {
+//                holder.tvTotalPic.setText("共" + ((size > 1 ? size / 2 : 1)) + "张图片");
+//            }
+            holder.tvTotalPic.setText("共" + size + "张图片");
+        }
+        holder.llMenu.setVisibility(View.GONE);
+
+        holder.llRoot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (holder.llMenu.isShown()) {
+                    holder.llMenu.setVisibility(View.GONE);
+                } else {
+                    holder.llMenu.setVisibility(View.VISIBLE);
+                }
+//                    if (listener != null) {
+//                        listener.OnItemClick(position);
+//                    }
+            }
+        });
+        holder.tvHotel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (listener != null) {
+                    listener.OnTvHotelClick(position);
+                }
+            }
+        });
+        holder.tvDetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (listener != null) {
+                    listener.OnTvDetailClick(position);
+                }
+            }
+        });
+        return convertView;
+    }
+
+    static class ViewHolder {
+        @BindView(R.id.ivPic)
+        ImageView ivPic;
+        @BindView(R.id.tvTotalPic)
+        TextView tvTotalPic;
+        @BindView(R.id.tvName)
+        TextView tvName;
+        @BindView(R.id.tvAddress)
+        TextView tvAddress;
+        @BindView(R.id.tvSummary)
+        TextView tvSummary;
+        @BindView(R.id.tvHotel)
+        TextView tvHotel;
+        @BindView(R.id.tvDetail)
+        TextView tvDetail;
+        @BindView(R.id.llMenu)
+        LinearLayout llMenu;
+        @BindView(R.id.llRoot)
+        LinearLayout llRoot;
+
+        ViewHolder(View view) {
+            ButterKnife.bind(this, view);
+        }
+    }
+
+    public void setListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
+
+    private OnItemClickListener listener;
+
+    public interface OnItemClickListener {
+        void OnTvHotelClick(int position);
+
+        void OnTvDetailClick(int position);
+    }
+}

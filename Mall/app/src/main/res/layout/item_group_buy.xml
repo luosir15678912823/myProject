@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="160dp"
+    android:layout_height="200dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginTop="3dp"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/iv"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:background="@mipmap/error" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@id/iv">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:singleLine="true"
+            android:text="标题"
+            android:textColor="#000"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tvCurrentPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_below="@id/tvTitle"
+            android:layout_marginTop="3dp"
+            android:paddingLeft="5dp"
+            android:text="折后价"
+            android:textColor="#e41f39"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tvMarketPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_below="@id/tvTitle"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="8dp"
+            android:layout_toRightOf="@id/tvCurrentPrice"
+            android:gravity="center"
+            android:text="原价"
+            android:textSize="8sp" />
+
+        <TextView
+            android:id="@+id/tvLine"
+            android:layout_width="25dp"
+            android:layout_height="match_parent"
+            android:layout_below="@id/tvTitle"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="8dp"
+            android:layout_toRightOf="@id/tvCurrentPrice"
+            android:background="@mipmap/horizontalline"/>
+
+        <TextView
+            android:id="@+id/tvShowCount"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/tvTitle"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="3dp"
+            android:text="仅剩10件"
+            android:textSize="10sp" />
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,114 @@
+[
+    {
+        "merged": "C:\\Nightly\\Android-Nightly\\group\\LoveTravel\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\located.png",
+        "source": "C:\\Nightly\\Android-Nightly\\group\\LoveTravel\\app\\src\\main\\res\\mipmap-xxhdpi\\located.png"
+    },
+    {
+        "merged": "C:\\Nightly\\Android-Nightly\\group\\LoveTravel\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\location.png",
+        "source": "C:\\Nightly\\Android-Nightly\\group\\LoveTravel\\app\\src\\main\\res\\mipmap-xxhdpi\\location.png"
+    },
+    {
+        "merged": "C:\\Nightly\\Android-Nightly\\group\\LoveTravel\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\arrow_left.png",
+        "source": "C:\\Nightly\\Android-Nightly\\group\\LoveTravel\\app\\src\\main\\res\\mipmap-xxhdpi\\arrow_left.png"
+    },
+    {
+        "merged": "C:\\Nightly\\Android-Nightly\\group\\LoveTravel\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\arrow_right_big.png",
+        "source": "C:\\Nightly\\Android-Nightly\\group\\LoveTravel\\app\\src\\main\\res\\mipmap-xxhdpi\\arrow_right_big.png"
+    },
+    {
+        "merged": "C:\\Nightly\\Android-Nightly\\group\\LoveTravel\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\menu_pressed.png",
+        "source": "C:\\Nightly\\Android-Nightly\\group\\LoveTravel\\app\\src\\main\\res\\mipmap-xxhdpi\\menu_pressed.png"
+    },
+    {
+        "merged": "C:\\Nightly\\Android-Nightly\\group\\LoveTravel\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\more.png",
+        "source": "C:\\Nightly\\Android-Nightly\\group\\LoveTravel\\app\\src\\main\\res\\mipmap-xxhdpi\\more.png"
+    },
+    {
+        "merged": "C:\\Nightly\\Android-Nightly\\group\\LoveTravel\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\search.png",
+        "source": "C:\\Nightly\\Android-Nightly\\group\\LoveTravel\\app\\src\\main\\res\\mipmap-xxhdpi\\search.png"
+    },
+    {
+        "merged": "C:\\Nightly\\Android-Nightly\\group\\LoveTravel\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\arrow_left_pressed.png",
+        "source": "C:\\Nightly\\Android-Nightly\\group\\LoveTravel\\app\\src\\main\\res\\mipmap-xxhdpi\\arrow_left_pressed.png"
+    },
+    {
+        "merged": "C:\\Nightly\\Android-Nightly\\group\\LoveTravel\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\person_big.png",
+        "source": "C:\\Nightly\\Android-Nightly\\group\\LoveTravel\\app\\src\\main\\res\\mipmap-xxhdpi\\person_big.png"
+    },
+    {
+        "merged": "C:\\Nightly\\Android-Nightly\\group\\LoveTravel\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\next2.png",
+        "source": "C:\\Nightly\\Android-Nightly\\group\\LoveTravel\\app\\src\\main\\res\\mipmap-xxhdpi\\next2.png"
+    },
+    {
+        "merged": "C:\\Nightly\\Android-Nightly\\group\\LoveTravel\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\microphone.png",
+        "source": "C:\\Nightly\\Android-Nightly\\group\\LoveTravel\\app\\src\\main\\res\\mipmap-xxhdpi\\microphone.png"
+    },
+    {
+        "merged": "C:\\Nightly\\Android-Nightly\\group\\LoveTravel\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\dot.png",
+        "source": "C:\\Nightly\\Android-Nightly\\group\\LoveTravel\\app\\src\\main\\res\\mipmap-xxhdpi\\dot.png"
+    },
+    {
+        "merged": "C:\\Nightly\\Android-Nightly\\group\\LoveTravel\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\delete.png",
+        "source": "C:\\Nightly\\Android-Nightly\\group\\LoveTravel\\app\\src\\main\\res\\mipmap-xxhdpi\\delete.png"
+    },
+    {
+        "merged": "C:\\Nightly\\Android-Nightly\\group\\LoveTravel\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\microphone_middle.png",
+        "source": "C:\\Nightly\\Android-Nightly\\group\\LoveTravel\\app\\src\\main\\res\\mipmap-xxhdpi\\microphone_middle.png"
+    },
+    {
+        "merged": "C:\\Nightly\\Android-Nightly\\group\\LoveTravel\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\setting.png",
+        "source": "C:\\Nightly\\Android-Nightly\\group\\LoveTravel\\app\\src\\main\\res\\mipmap-xxhdpi\\setting.png"
+    },
+    {
+        "merged": "C:\\Nightly\\Android-Nightly\\group\\LoveTravel\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\arrow.png",
+        "source": "C:\\Nightly\\Android-Nightly\\group\\LoveTravel\\app\\src\\main\\res\\mipmap-xxhdpi\\arrow.png"
+    },
+    {
+        "merged": "C:\\Nightly\\Android-Nightly\\group\\LoveTravel\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\location_middle.png",
+        "source": "C:\\Nightly\\Android-Nightly\\group\\LoveTravel\\app\\src\\main\\res\\mipmap-xxhdpi\\location_middle.png"
+    },
+    {
+        "merged": "C:\\Nightly\\Android-Nightly\\group\\LoveTravel\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\located_small.png",
+        "source": "C:\\Nightly\\Android-Nightly\\group\\LoveTravel\\app\\src\\main\\res\\mipmap-xxhdpi\\located_small.png"
+    },
+    {
+        "merged": "C:\\Nightly\\Android-Nightly\\group\\LoveTravel\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\left_arrow_145px.png",
+        "source": "C:\\Nightly\\Android-Nightly\\group\\LoveTravel\\app\\src\\main\\res\\mipmap-xxhdpi\\left_arrow_145px.png"
+    },
+    {
+        "merged": "C:\\Nightly\\Android-Nightly\\group\\LoveTravel\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\exit.png",
+        "source": "C:\\Nightly\\Android-Nightly\\group\\LoveTravel\\app\\src\\main\\res\\mipmap-xxhdpi\\exit.png"
+    },
+    {
+        "merged": "C:\\Nightly\\Android-Nightly\\group\\LoveTravel\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\menu.png",
+        "source": "C:\\Nightly\\Android-Nightly\\group\\LoveTravel\\app\\src\\main\\res\\mipmap-xxhdpi\\menu.png"
+    },
+    {
+        "merged": "C:\\Nightly\\Android-Nightly\\group\\LoveTravel\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\pin_location_middle.png",
+        "source": "C:\\Nightly\\Android-Nightly\\group\\LoveTravel\\app\\src\\main\\res\\mipmap-xxhdpi\\pin_location_middle.png"
+    },
+    {
+        "merged": "C:\\Nightly\\Android-Nightly\\group\\LoveTravel\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\search_pressed.png",
+        "source": "C:\\Nightly\\Android-Nightly\\group\\LoveTravel\\app\\src\\main\\res\\mipmap-xxhdpi\\search_pressed.png"
+    },
+    {
+        "merged": "C:\\Nightly\\Android-Nightly\\group\\LoveTravel\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\update.png",
+        "source": "C:\\Nightly\\Android-Nightly\\group\\LoveTravel\\app\\src\\main\\res\\mipmap-xxhdpi\\update.png"
+    },
+    {
+        "merged": "C:\\Nightly\\Android-Nightly\\group\\LoveTravel\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\ic_launcher.png",
+        "source": "C:\\Nightly\\Android-Nightly\\group\\LoveTravel\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Nightly\\Android-Nightly\\group\\LoveTravel\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\person.png",
+        "source": "C:\\Nightly\\Android-Nightly\\group\\LoveTravel\\app\\src\\main\\res\\mipmap-xxhdpi\\person.png"
+    },
+    {
+        "merged": "C:\\Nightly\\Android-Nightly\\group\\LoveTravel\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\favorite_unchecked.png",
+        "source": "C:\\Nightly\\Android-Nightly\\group\\LoveTravel\\app\\src\\main\\res\\mipmap-xxhdpi\\favorite_unchecked.png"
+    },
+    {
+        "merged": "C:\\Nightly\\Android-Nightly\\group\\LoveTravel\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\favorite.png",
+        "source": "C:\\Nightly\\Android-Nightly\\group\\LoveTravel\\app\\src\\main\\res\\mipmap-xxhdpi\\favorite.png"
+    }
+]

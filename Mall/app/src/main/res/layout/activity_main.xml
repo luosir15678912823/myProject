@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/llRoot"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context="com.qianfeng.mall.MainActivity">
+
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"></android.support.v4.view.ViewPager>
+
+        <com.qianfeng.mall.widget.MaterialLayout
+            android:id="@+id/ML"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            app:alpha="200"
+            app:duration="150"
+            app:scale="0.6"
+            app:viewColor="@color/colorBlack">
+
+            <RadioGroup
+                android:id="@+id/rgTab"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="#fff"
+                android:orientation="horizontal"
+                android:padding="5dp">
+
+                <RadioButton
+                    android:id="@+id/rbHome"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:checked="true"
+                    android:drawableTop="@drawable/selector_home_rb"
+                    android:gravity="center"
+                    android:text="主页"
+                    android:textColor="#eb4f38"
+                    android:textSize="10sp" />
+
+                <RadioButton
+                    android:id="@+id/rbClass"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:drawableTop="@drawable/selector_class_rb"
+                    android:gravity="center"
+                    android:text="分类"
+                    android:textColor="#707076"
+                    android:textSize="10sp" />
+
+                <RadioButton
+                    android:id="@+id/rbGroupBuy"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:drawableTop="@drawable/selector_groupbuy_rb"
+                    android:gravity="center"
+                    android:text="团购"
+                    android:textColor="#707076"
+                    android:textSize="10sp" />
+
+                <RadioButton
+                    android:id="@+id/rbShoppingCar"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:drawableTop="@drawable/selector_shopping_rb"
+                    android:gravity="center"
+                    android:text="购物车"
+                    android:textColor="#707076"
+                    android:textSize="10sp" />
+
+                <RadioButton
+                    android:id="@+id/rbMine"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:drawableTop="@drawable/selector_mine_rb"
+                    android:gravity="center"
+                    android:text="我的"
+                    android:textColor="#707076"
+                    android:textSize="10sp" />
+
+
+            </RadioGroup>
+        </com.qianfeng.mall.widget.MaterialLayout>
+    </LinearLayout>
+    <FrameLayout
+        android:id="@+id/fl"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:layout_height="match_parent"></FrameLayout>
+
+</FrameLayout>
+

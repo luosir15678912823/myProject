@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            android:background="@color/cyan"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+            <TextView
+                android:id="@+id/tvBack"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:background="@mipmap/arrow_left_pressed" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:text="详情"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:gravity="center" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv"
+            android:layout_width="240dp"
+            android:layout_height="240dp"
+            android:layout_marginTop="5dp"
+            android:src="@mipmap/ic_launcher" />
+
+        <LinearLayout
+            android:layout_width="240dp"
+            android:layout_height="30dp"
+            android:gravity="center_vertical|right"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:text="分享到:" />
+
+            <ImageView
+                android:id="@+id/weChat"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:src="@mipmap/wechat" />
+
+            <ImageView
+                android:id="@+id/QQ"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@mipmap/qq" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvSummary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="商品描述"
+                android:textColor="#000"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tvCurrentPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="商品现价"
+                android:textColor="#e41f39" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:gravity="center_vertical"
+                    android:text="原价：" />
+
+                <TextView
+                    android:id="@+id/tvMarketPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_toRightOf="@id/tv"
+                    android:gravity="center_vertical"
+                    android:text="￥999" />
+
+                <TextView
+                    android:id="@+id/tvLine"
+                    android:layout_width="45dp"
+                    android:layout_height="20dp"
+                    android:layout_alignLeft="@id/tvMarketPrice"
+                    android:background="@mipmap/horizontalline" />
+
+
+            </RelativeLayout>
+
+
+            <TextView
+                android:id="@+id/tvShowCount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="仅剩20件" />
+
+            <TextView
+                android:id="@+id/tvTime"
+                android:text="活动时间："
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:textColor="#e41f39"
+                android:id="@+id/tvActivityTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp" />
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/tvLookEvaluation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="查看商品评价 已有80人评价 95%好评"
+            android:textSize="15sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingBottom="10dp">
+
+            <Button
+                android:id="@+id/btnAddShoppingCar"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:text="加入购物车" />
+
+            <Button
+                android:id="@+id/btnBuy"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:text="立即购买" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>
+

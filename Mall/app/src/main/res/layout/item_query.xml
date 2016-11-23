@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/sdv"
+        android:layout_width="200dp"
+        android:layout_gravity="center"
+        android:layout_height="200dp"
+        android:background="@mipmap/error" />
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:paddingLeft="5dp"
+        android:text="标题"
+        android:textColor="#000"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/tvPrice"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:paddingLeft="5dp"
+        android:singleLine="true"
+        android:text="价格"
+        android:textColor="#ea2251"
+        android:textSize="12sp" />
+
+
+</LinearLayout>
